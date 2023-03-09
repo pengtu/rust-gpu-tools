@@ -26,6 +26,10 @@ fn get_pci_id(device: &opencl3::device::Device) -> GPUResult<PciId> {
             let device_id = topo.device as u16;
             (bus_id << 8) | device_id
         }
+        Vendor::Intel => {
+            // Fix me:  Currently, opencl3 doesn't provide Intel GPU pci_id
+            0x0002
+        }
         Vendor::Nvidia => {
             let bus_id = device.pci_bus_id_nv()? as u16;
             let device_id = device.pci_slot_id_nv()? as u16;
